@@ -1,0 +1,136 @@
+/* 1. Global settings and reusable components */
+:root {
+  --ink: #e7eff9;
+  --muted: #b5c7db;
+  --accent: #73dbf5;
+  --paper: #142238;
+  --background: #0a1424;
+  --line: #31435a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--ink);
+  line-height: 1.65;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.container { width: min(1100px, calc(100% - 40px)); margin: 0 auto; }
+main { flex: 1; padding-bottom: 48px; }
+h1, h2, h3 { line-height: 1.22; margin: 0 0 12px; }
+p { margin: 0 0 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible { outline: 3px solid #cc8d28; outline-offset: 3px; }
+.eyebrow { font-size: .76rem; font-weight: bold; text-transform: uppercase; letter-spacing: .12em; color: var(--accent); margin-bottom: 10px; }
+.button { display: inline-block; border: 1px solid var(--accent); border-radius: 7px; padding: 10px 18px; background: var(--accent); color: #0a1424; font: inherit; font-weight: bold; text-decoration: none; cursor: pointer; }
+.button:hover { background: #a5e9fa; }
+.read-link { font-weight: bold; text-decoration: none; }
+.read-link:hover { text-decoration: underline; }
+.panel { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 26px; }
+
+/* 2. Header and navbar: Flexbox */
+.site-header { background: var(--paper); border-bottom: 1px solid var(--line); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 17px 0; }
+.brand { color: var(--ink); font-size: 1.24rem; font-weight: bold; text-decoration: none; }
+.brand span { color: var(--accent); }
+nav { display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 5px; }
+nav a { color: var(--ink); text-decoration: none; padding: 7px 12px; border-radius: 6px; font-weight: bold; font-size: .92rem; }
+nav a:hover, nav a[aria-current="page"] { color: var(--accent); background: #203b53; }
+.site-footer { color: var(--muted); border-top: 1px solid var(--line); background: var(--paper); padding: 20px 0; font-size: .9rem; }
+
+/* 3. Intro sections */
+.intro { margin: 30px 0 28px; }
+.home-intro { background: linear-gradient(120deg, #112a44, #173c56); color: white; border-radius: 14px; padding: clamp(24px, 5vw, 54px); }
+.home-intro .eyebrow { color: #9ceaff; }
+.home-intro h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); letter-spacing: -.025em; }
+.home-intro p:not(.eyebrow) { max-width: 560px; color: #d5e5f5; }
+.home-intro .button { background: #e7eff9; border-color: #e7eff9; color: #112a44; }
+.home-intro .button:hover { background: #b4ecfa; }
+.page-intro { border-bottom: 1px solid var(--line); padding-bottom: 18px; }
+.page-intro h1 { font-size: clamp(2rem, 4vw, 3rem); }
+.page-intro p:not(.eyebrow) { color: var(--muted); margin-bottom: 0; }
+
+/* 4. Home layout: Grid. Rama’s student ID ends in 1 (odd), so the sidebar is on the left. */
+.home-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  grid-template-areas: "posts sidebar";
+  gap: 24px;
+  align-items: start;
+}
+.sidebar-left .home-layout {
+  grid-template-columns: 250px minmax(0, 1fr);
+  grid-template-areas: "sidebar posts";
+}
+.sidebar { grid-area: sidebar; background: var(--paper); border: 1px solid var(--line); padding: 22px; border-radius: 12px; }
+.sidebar section + section { border-top: 1px solid var(--line); margin-top: 24px; padding-top: 20px; }
+.sidebar h2 { font-size: 1.15rem; }
+.sidebar p:not(.eyebrow) { color: var(--muted); font-size: .94rem; }
+.category-list { list-style: none; padding: 0; margin: 0; }
+.category-list a { display: block; padding: 7px 0; }
+.latest { grid-area: posts; min-width: 0; }
+.post-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.post-card { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
+.post-card h3, .post-card p { margin: 0; }
+.post-card h3 { font-size: 1.27rem; }
+.post-card p { color: var(--muted); }
+.card-meta { display: flex; width: 100%; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: .8rem; }
+.tag { color: var(--accent); background: #203b53; border-radius: 20px; padding: 3px 10px; font-weight: bold; }
+.featured { grid-column: span 2; border-left: 5px solid var(--accent); }
+.featured h3 { font-size: 1.6rem; }
+
+/* 5. Posts and deliberate box model */
+.article-list { display: grid; gap: 20px; max-width: 850px; }
+.full-post { scroll-margin-top: 20px; }
+.full-post h2 { font-size: 1.55rem; }
+.callout {
+  box-sizing: border-box;
+  margin: 20px 0;
+  border: 2px solid #47718b;
+  border-left: 5px solid var(--accent);
+  padding: 14px 18px;
+  background: #172e44;
+}
+
+/* 6. Gallery and about pages: Grid */
+.gallery-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.gallery-item { margin: 0; padding: 0; overflow: hidden; }
+.gallery-item img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; }
+.gallery-item figcaption { padding: 14px; font-size: .93rem; }
+.gallery-item figcaption span { color: var(--accent); font-weight: bold; margin-right: 6px; }
+.bio { margin-bottom: 18px; }
+.bio p { margin-bottom: 0; }
+.about-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.detail-list { margin: 0; padding-left: 20px; }
+
+/* 7. Contact form: native HTML validation */
+.contact-panel { max-width: 720px; }
+.contact-panel > p { color: var(--muted); }
+form { display: grid; gap: 8px; }
+label { font-weight: bold; }
+input, select, textarea { width: 100%; min-width: 0; color: var(--ink); font: inherit; background: #0e1a2d; border: 1px solid #627d99; border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; }
+textarea { resize: vertical; }
+form .button { justify-self: start; }
+
+/* 8. Responsive design: mobile order = intro, sidebar, posts */
+@media (max-width: 760px) {
+  .container { width: calc(100% - 28px); }
+  .header-inner { align-items: flex-start; flex-direction: column; }
+  nav { justify-content: flex-start; }
+  nav a { padding: 6px 9px; }
+  .home-layout, .sidebar-left .home-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "sidebar" "posts";
+  }
+  .post-grid, .gallery-grid, .about-grid { grid-template-columns: minmax(0, 1fr); }
+  .featured { grid-column: span 1; }
+  .panel { padding: 20px; }
+  .gallery-item { padding: 0; }
+}
+
+/* Project screenshots: keep the entire capture visible, without cropping. */
+.gallery-item img { height: auto; aspect-ratio: 8 / 5; object-fit: contain; background: var(--background); }
