@@ -1,0 +1,12 @@
+My Personal Blog — Assignment Note
+Rama Ahmed Ali | Student ID: 12506271 | Cybersecurity
+Git Repository: https://github.com/ramaahmad77777777-hub/Rama-Ali
+
+1. Design decision
+The blog uses a dark navy and cyan colour scheme inspired by cybersecurity. The desktop layout places the sidebar on the left because my student ID ends in 1. CSS Grid allows the featured post to span two columns, while Flexbox arranges the navigation and the content of the post cards. On smaller screens, a media query changes the page to one column.
+
+2. Problem and solution
+During AI-assisted development, the initial template used a right-hand sidebar. This did not match the odd student ID requirement. The template was adjusted using the sidebar-left class and CSS grid-template-areas. Automated browser rendering confirmed the left-side desktop layout and the correct mobile order. The gallery was also changed from supplied illustrations of uncertain ownership to documented project screenshots.
+
+3. AI statement
+I used OpenAI ChatGPT to generate and customise the HTML and CSS, draft the articles and assignment note, prepare a digital wireframe reference, capture six screenshots of the AI-assisted project and perform preliminary automated checks. The screenshots in the draft gallery were produced during AI-assisted development, not independently captured by me. I must review the articles, images and code before submitting.
